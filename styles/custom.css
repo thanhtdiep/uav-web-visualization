@@ -1,0 +1,42 @@
+.wf {
+    outline: 1px solid black;
+}
+
+.rw1 {
+    outline: 1px solid black;
+    max-height: 60vh;
+}
+
+.rw2 {
+    outline: 1px solid black;
+    min-height: 38vh;
+    margin-top: 20px;
+}
+
+.container-fluid {
+    min-height: 100vh;
+}
+
+/* Image Stream */
+.gallery {
+    width: 250px;
+    height: 600px;
+    border: 1px solid black;
+    vertical-align: middle;
+    text-align: center;
+    display: table-cell;
+    overflow-y:auto;
+}
+
+img {
+    max-width: 60%;
+    max-height: 60%;
+    display: block;
+    margin: 10px auto;
+}
+
+/* Table */
+/* .table {
+    width: 25vw;
+    height: auto;
+} */

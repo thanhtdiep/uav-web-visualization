@@ -1,0 +1,36 @@
+{
+  "name": "web-interface",
+  "version": "1.0.0",
+  "description": "UAV Web Interface",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "server": "node server.js",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.2",
+    "chart.js": "^2.9.3",
+    "cloudinary": "^1.23.0",
+    "connect-multiparty": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "next": "^9.5.2",
+    "pubnub": "^4.29.6",
+    "pusher": "^3.0.1",
+    "pusher-js": "^6.0.3",
+    "react": "^16.13.1",
+    "react-chartjs-2": "^2.9.0",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "npm-run-all": "^4.1.5"
+  }
+}
