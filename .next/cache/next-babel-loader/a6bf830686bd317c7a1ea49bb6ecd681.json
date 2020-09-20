@@ -1,0 +1,1 @@
+{"ast":null,"code":"const handler = (req, res) => {\n  return res.json({\n    hello: 'world!'\n  });\n};\n\nexport default handler;","map":null,"metadata":{},"sourceType":"module"}

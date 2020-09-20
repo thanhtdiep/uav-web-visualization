@@ -1,14 +1,14 @@
 .wf {
-    outline: 1px solid black;
+    /* outline: 1px solid black; */
 }
 
 .rw1 {
-    outline: 1px solid black;
+    /* outline: 1px solid black; */
     max-height: 60vh;
 }
 
 .rw2 {
-    outline: 1px solid black;
+    /* outline: 1px solid black; */
     min-height: 38vh;
     margin-top: 20px;
 }
@@ -21,7 +21,7 @@
 .gallery {
     width: 250px;
     height: 600px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     vertical-align: middle;
     text-align: center;
     display: table-cell;
@@ -36,7 +36,13 @@ img {
 }
 
 /* Table */
-/* .table {
+.table {
     width: 25vw;
     height: auto;
-} */
+    overflow-x: auto;
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
+main {
+    font-family: 'Kumbh Sans', sans-serif;
+}

@@ -1,13 +1,15 @@
-import { parse } from 'dotenv/types';
 import React from 'react';
 import { Line } from 'react-chartjs-2'
 
 export default class LineChart extends React.Component {
     render() {
-        const parseData = data => ({
-            lables: [],
+        // console.log(Object.values(this.props.data));
+        // console.log(this.props.time);
+
+        const parseData = (data, time) => ({
+            labels: time,
             datasets: [{
-                label: "Temperature Overtime",
+                label: this.props.title,
                 fill: false,
                 lineTension: 0.1,
                 backgroundColor: "rgba(75,192,192,0.4)",
@@ -25,16 +27,25 @@ export default class LineChart extends React.Component {
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data: [],
                 spanGaps: false,
+                data
             }]
         })
 
-        const options = {}
+        const options = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            maintainAspectRatio: true
+        }
 
-        return(
+        return (
             <Line
-                data={parseData(this.props.data)}
+                data={parseData(Object.values(this.props.data), this.props.time)}
                 option={options}
             />
         )

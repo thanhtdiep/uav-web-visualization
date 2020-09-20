@@ -40,7 +40,7 @@ app.prepare()
 
         // Setup multiparty
         const multipartMiddleware = multipart();
-        
+
         // server.use('/update', updateRouter);
 
         server.get('*', (req, res) => {
@@ -68,7 +68,6 @@ app.prepare()
         });
 
         server.post('/update/img', multipartMiddleware, (req, res) => {
-            console.log(req.body);
             // Save to cloudinary
             cloudinary.v2.uploader.upload(req.files.image.path, {}, function (
                 error,
@@ -77,19 +76,17 @@ app.prepare()
                 if (error) {
                     return res.status(500).send(error);
                 }
-                // console.log(result);
                 // Save to database
                 const object = Object.assign({}, result, req.body);
-                // console.log(object);
                 // Filter inputs and add stats for dynamic update
                 pusher.trigger('demo-stats', 'gallery', {
                     image: object,
                 });
-                res.json(object);
+                res.sendStatus(200);
             });
         });
 
-        server.listen(port, err => {
+        server.listen(port, '0.0.0.0', err => {
             if (err) throw err;
             console.log(`> Ready on http://localhost:${port}`);
         });

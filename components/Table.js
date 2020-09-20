@@ -21,19 +21,19 @@ export default class Table extends React.Component {
                         <td>A</td>
                         {this.props.a != null ? this.props.a.map(e => (
                             <td key={e}>{e}</td>
-                        )) : <td></td>}
+                        )) : <td>-</td>}
                     </tr>
                     <tr>
                         <td>B</td>
                         {this.props.b != null ? this.props.b.map(e => (
                             <td key={e}>{e}</td>
-                        )) : <td></td>}
+                        )) : <td>-</td>}
                     </tr>
                     <tr>
                         <td>C</td>
                         {this.props.c != null ? this.props.c.map(e => (
                             <td key={e}>{e}</td>
-                        )) : <td></td>}
+                        )) : <td>-</td>}
                     </tr>
                 </tbody>
             </table>
