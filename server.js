@@ -49,7 +49,8 @@ app.prepare()
 
         // Handle UPDATE route
         server.post('/update/stats', (req, res) => {
-            console.log(req.body);
+            // console.log(req.body);
+            // const request = JSON.parse(req);
             const stats = [
                 req.body.temp,
                 req.body.pressure,

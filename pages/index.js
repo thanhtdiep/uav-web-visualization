@@ -96,35 +96,43 @@ export default class IndexPage extends React.Component {
               {images}
               {/* <img src="http://res.cloudinary.com/dtmjpfpip/image/upload/v1599914558/pxa7wzqdlznqzdi3tof4.jpg" /> */}
             </div>
-            <div className="col-8 col-sm-6 wf">Video Stream</div>
-            <div className="col wf">
-            <Tabs
+            <div className="col-8 col-sm-6 videoContainer">
+              <iframe width="720" height="570" src="https://www.youtube.com/embed/K-bqg8JYlPo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div className="col lineContainer">
+              <Tabs
                 id="controlled-tab-example"
                 activeKey={this.state.key}
                 onSelect={(k) => this.setState({ key: k })}
               >
                 <Tab eventKey="chart1" title="Chart 1">
-                  <LineChart data={this.state.lineTemp} time={this.state.time} title="Temperature Overtime" />
-                  <LineChart data={this.state.linePressure} time={this.state.time} title="Pressure Overtime" />
-                  <LineChart data={this.state.lineHumid} time={this.state.time} title="Humidity Overtime" />
+                  <div className="line">
+                    <LineChart data={this.state.lineTemp} time={this.state.time} title="Temperature Overtime" />
+                    <LineChart data={this.state.linePressure} time={this.state.time} title="Pressure Overtime" />
+                    <LineChart data={this.state.lineHumid} time={this.state.time} title="Humidity Overtime" />
+                  </div>
                 </Tab>
                 <Tab eventKey="chart2" title="Chart 2">
-                  <LineChart data={this.state.lineLight} time={this.state.time} title="Light Overtime" />
-                  <LineChart data={this.state.lineNoise} time={this.state.time} title="Noise Overtime" />
-                  <LineChart data={this.state.lineGas} time={this.state.time} title="Gas Overtime" />
+                  <div className="line">
+                    <LineChart data={this.state.lineLight} time={this.state.time} title="Light Overtime" />
+                    <LineChart data={this.state.lineNoise} time={this.state.time} title="Noise Overtime" />
+                    <LineChart data={this.state.lineGas} time={this.state.time} title="Gas Overtime" />
+                  </div>
                 </Tab>
               </Tabs>
             </div>
           </div>
 
           <div className="row rw2">
-            <div className="col wf">
+            <div className="col wf2">
               <Table a={this.state.targetA} b={this.state.targetB} c={this.state.targetC} />
             </div>
-            <div className="col wf">
-              <BarChart data={this.state.data} />
+            <div className="col wf2">
+              <div className="bar">
+                <BarChart data={this.state.data} />
+              </div>
             </div>
-            <div className="col wf"></div>
+            <div className="col wf2"></div>
           </div>
         </main>
       </Layout >

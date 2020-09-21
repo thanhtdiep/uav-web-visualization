@@ -4,13 +4,20 @@
 
 .rw1 {
     /* outline: 1px solid black; */
-    max-height: 60vh;
+    height: 70vh;
 }
 
 .rw2 {
-    /* outline: 1px solid black; */
-    max-height: 30vh;
-    margin-top: 20px;
+    outline: 1px solid black;
+    min-height: 30vh;
+    margin-top: 0px;
+    padding: 0;
+    display: flex;
+}
+
+.wf2 {
+    outline: 1px solid black;
+    padding: 0;
 }
 
 .container-fluid {
@@ -20,8 +27,8 @@
 /* Image Stream */
 .gallery {
     width: 250px;
-    height: 600px;
-    /* border: 1px solid black; */
+    height: 70vh;
+    border: 1px solid black;
     vertical-align: middle;
     text-align: center;
     display: table-cell;
@@ -37,17 +44,41 @@ img {
 
 /* Table */
 table {
-    /* width:3; */
-    height: 27vh;
-    padding-right: 0;
+    border: 1px solid black;
+    height: 29vh;
+    margin-left: 0;
+    padding: 0;
     text-align: center;
     overflow-x: auto;
     font-family: 'Kumbh Sans', sans-serif;
 }
+
+.bar {
+    border: 1px solid black;
+}
+
+.lineContainer {
+    /* border: 1px solid black; */
+    padding-top: 10px;
+    height: 100vh;
+}
+
+.line {
+    height: 33vh;
+}
+
 table th {
     padding: 4px;
 }
 
-main {
+.videoContainer {
+    border: 1px solid black;
+    padding: 0;
+    height: 70vh;
+}
+
+html * {
     font-family: 'Kumbh Sans', sans-serif;
+    margin: 0;
+    padding: 0;
 }
