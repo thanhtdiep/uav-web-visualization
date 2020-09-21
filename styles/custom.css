@@ -9,12 +9,12 @@
 
 .rw2 {
     /* outline: 1px solid black; */
-    min-height: 38vh;
+    max-height: 30vh;
     margin-top: 20px;
 }
 
 .container-fluid {
-    min-height: 100vh;
+    max-height: 100vh;
 }
 
 /* Image Stream */
@@ -36,11 +36,16 @@ img {
 }
 
 /* Table */
-.table {
-    width: 25vw;
-    height: auto;
+table {
+    /* width:3; */
+    height: 27vh;
+    padding-right: 0;
+    text-align: center;
     overflow-x: auto;
     font-family: 'Kumbh Sans', sans-serif;
+}
+table th {
+    padding: 4px;
 }
 
 main {

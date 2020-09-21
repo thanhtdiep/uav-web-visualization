@@ -4,7 +4,7 @@ export default class Table extends React.Component {
     render() {
 
         return (
-            <table className="table">
+            <table>
                 <thead>
                     <tr>
                         <th>Target</th>
