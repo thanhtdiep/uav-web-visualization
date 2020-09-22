@@ -20,9 +20,8 @@ export default class IndexPage extends React.Component {
     this.state = {
       data: [],
       images: [],
-      targetA: [],
-      targetB: [],
-      targetC: [],
+      target: [],
+      targets: [],
       lineTemp: [],
       linePressure: [],
       lineHumid: [],
@@ -39,16 +38,11 @@ export default class IndexPage extends React.Component {
     this.receiveImgFromPusher();
   }
 
-  // componentWillUnmount() {
-  //   this.abortController.abort();
-  // }
-
   receiveStatsFromPusher() {
     channel.bind('bar-stats', data => {
       console.log(data);
       this.setState({
         data
-        // time: [...[2, this.state.lineTemp.length + 1]]
       })
       this.setState(() => {
         this.state.lineTemp.push(data[0]);
@@ -59,8 +53,6 @@ export default class IndexPage extends React.Component {
         this.state.lineGas.push(data[5]);
         this.state.time.push((new Date).toTimeString().substring(0, 8));
       })
-      console.log("lineTemp : " + this.state.lineTemp);
-      console.log("time : " + this.state.time);
     })
 
   }
@@ -70,13 +62,9 @@ export default class IndexPage extends React.Component {
       this.setState({
         images: [data.image, ...this.state.images],
       });
-      if (Object.values(data)[0].id == 1) {
-        this.setState({ targetA: [...this.state.data] });
-      } else if (Object.values(data)[0].id == 2) {
-        this.setState({ targetB: [...this.state.data] });
-      } else {
-        this.setState({ targetC: [...this.state.data] });
-      }
+      this.setState(() => {
+        this.state.targets.push([Object.values(data)[0].id,...this.state.data]);
+      });
     });
   }
 
@@ -85,38 +73,41 @@ export default class IndexPage extends React.Component {
       <img alt="" className="photo" key={`image-${index} }`} src={url} />
     );
     const images = this.state.images.map((e, i) => image(e.secure_url, i));
-
     return (
       <Layout pageTitle="Realtime Data Visualization">
         <main className="container-fluid wf">
-
           <div className="row rw1">
-            <div className="col-sm-2 gallery">
+            <div className="col-sm-2 imageContainer">
               Image Stream
               {images}
-              {/* <img src="http://res.cloudinary.com/dtmjpfpip/image/upload/v1599914558/pxa7wzqdlznqzdi3tof4.jpg" /> */}
+              <img className="photo" src="http://res.cloudinary.com/dtmjpfpip/image/upload/v1599914558/ex7todyv7i69cytunphw.jpg" />
+              <img className="photo" src="http://res.cloudinary.com/dtmjpfpip/image/upload/v1599914558/e8l3xffokh6ie9foy0pn.jpg" />
+              <img className="photo" src="http://res.cloudinary.com/dtmjpfpip/image/upload/v1599914558/jnpali1c5dduakq0b8rl.jpg" />
+              <img className="photo" src="http://res.cloudinary.com/dtmjpfpip/image/upload/v1599914558/ex7todyv7i69cytunphw.jpg" />
+
             </div>
             <div className="col-8 col-sm-6 videoContainer">
-              <iframe width="720" height="570" src="https://www.youtube.com/embed/K-bqg8JYlPo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe width="720" height="570" src="https://www.youtube.com/embed/K-bqg8JYlPo" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             </div>
-            <div className="col lineContainer">
+            <div className="col-4 lineContainer">
               <Tabs
                 id="controlled-tab-example"
+                
                 activeKey={this.state.key}
                 onSelect={(k) => this.setState({ key: k })}
               >
                 <Tab eventKey="chart1" title="Chart 1">
                   <div className="line">
-                    <LineChart data={this.state.lineTemp} time={this.state.time} title="Temperature Overtime" />
-                    <LineChart data={this.state.linePressure} time={this.state.time} title="Pressure Overtime" />
-                    <LineChart data={this.state.lineHumid} time={this.state.time} title="Humidity Overtime" />
+                    <LineChart data={this.state.lineTemp} time={this.state.time} title="Temperature Overtime" color="rgb(0,255,159)" unit="unit"/>
+                    <LineChart data={this.state.linePressure} time={this.state.time} title="Pressure Overtime" color="rgb(0,184,255)" unit="unit" />
+                    <LineChart data={this.state.lineHumid} time={this.state.time} title="Humidity Overtime" color="rgb(0,30,255)" unit="unit" />
                   </div>
                 </Tab>
                 <Tab eventKey="chart2" title="Chart 2">
                   <div className="line">
-                    <LineChart data={this.state.lineLight} time={this.state.time} title="Light Overtime" />
-                    <LineChart data={this.state.lineNoise} time={this.state.time} title="Noise Overtime" />
-                    <LineChart data={this.state.lineGas} time={this.state.time} title="Gas Overtime" />
+                    <LineChart data={this.state.lineLight} time={this.state.time} title="Light Overtime" color="rgb(106, 90, 205)" unit="unit"/>
+                    <LineChart data={this.state.lineNoise} time={this.state.time} title="Noise Overtime" color="rgb(255, 165, 0)" unit="unit"/>
+                    <LineChart data={this.state.lineGas} time={this.state.time} title="Gas Overtime" color="rgb(255, 0, 0)" unit="unit" />
                   </div>
                 </Tab>
               </Tabs>
@@ -124,11 +115,11 @@ export default class IndexPage extends React.Component {
           </div>
 
           <div className="row rw2">
-            <div className="col wf2">
-              <Table a={this.state.targetA} b={this.state.targetB} c={this.state.targetC} />
+            <div className="col tableContainer">
+              <Table data={this.state.targets} />
             </div>
             <div className="col wf2">
-              <div className="bar">
+              <div className="col bar">
                 <BarChart data={this.state.data} />
               </div>
             </div>

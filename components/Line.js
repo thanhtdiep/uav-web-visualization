@@ -1,19 +1,17 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2';
 
 export default class LineChart extends React.Component {
     render() {
-        // console.log(Object.values(this.props.data));
-        // console.log(this.props.time);
-
+        console.log(this.props.color);
         const parseData = (data, time) => ({
             labels: time,
             datasets: [{
-                label: this.props.title,
+                label: this.props.unit,
                 fill: false,
                 lineTension: 0.1,
-                backgroundColor: "rgba(75,192,192,0.4)",
-                borderColor: "rgba(75,192,192,1)",
+                backgroundColor: "rgba(75,192,192,1)",
+                borderColor: this.props.color,
                 borderCapStyle: 'butt',
                 borderDash: [],
                 borderDashOffset: 0.0,
@@ -31,22 +29,43 @@ export default class LineChart extends React.Component {
                 data
             }]
         })
-
-        const options = {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            },
-            maintainAspectRatio: true
-        }
-
         return (
             <Line
                 data={parseData(Object.values(this.props.data), this.props.time)}
-                option={options}
+                options= {{
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            fontColor: 'rgb(165, 165, 165)',
+                            fontColor: 'white',
+                            fontFamily: 'Roboto Mono',
+                        }
+                    },
+                    title: {
+                        display: true,
+                        fontColor: 'white',
+                        fontFamily: 'Roboto Mono',
+                        text: this.props.title,
+                        fontSize: 14,
+                        fontStyle: 'regular'
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                fontFamily: 'Roboto Mono',
+                                fontColor: 'rgb(165, 165, 165)'
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontFamily: 'Roboto Mono',
+                                fontColor:  'rgb(165, 165, 165)'
+                            }
+                        }]
+                    }
+                }}
             />
         )
     }

@@ -1,8 +1,8 @@
 import React from 'react';
+import uuid from 'uuid';
 
 export default class Table extends React.Component {
     render() {
-
         return (
             <table>
                 <thead>
@@ -17,23 +17,52 @@ export default class Table extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
+                    {this.props.data != null ? this.props.data.map(element => (
+                        <tr>
+                            <td key={uuid.v4()}>{element[0]}</td>
+                            <td key={uuid.v4()}>{element[1]}</td>
+                            <td key={uuid.v4()}>{element[2]}</td>
+                            <td key={uuid.v4()}>{element[3]}</td>
+                            <td key={uuid.v4()}>{element[4]}</td>
+                            <td key={uuid.v4()}>{element[5]}</td>
+                            <td key={uuid.v4()}>{element[6]}</td>
+                        </tr>
+                    )) : <tr></tr>}
                     <tr>
                         <td>A</td>
-                        {this.props.a != null ? this.props.a.map(e => (
-                            <td key={e}>{e}</td>
-                        )) : <td>-</td>}
+                        <td>12</td>
+                        <td>12</td>
+                        <td>12</td>
+                        <td>12</td>
+                        <td>12</td>
+                        <td>12</td>
                     </tr>
                     <tr>
                         <td>B</td>
-                        {this.props.b != null ? this.props.b.map(e => (
-                            <td key={e}>{e}</td>
-                        )) : <td>-</td>}
+                        <td>42</td>
+                        <td>42</td>
+                        <td>42</td>
+                        <td>42</td>
+                        <td>42</td>
+                        <td>42</td>
                     </tr>
                     <tr>
                         <td>C</td>
-                        {this.props.c != null ? this.props.c.map(e => (
-                            <td key={e}>{e}</td>
-                        )) : <td>-</td>}
+                        <td>42</td>
+                        <td>42</td>
+                        <td>42</td>
+                        <td>42</td>
+                        <td>42</td>
+                        <td>42</td>
+                    </tr>
+                    <tr>
+                        <td>C</td>
+                        <td>42</td>
+                        <td>42</td>
+                        <td>42</td>
+                        <td>42</td>
+                        <td>42</td>
+                        <td>42</td>
                     </tr>
                 </tbody>
             </table>
