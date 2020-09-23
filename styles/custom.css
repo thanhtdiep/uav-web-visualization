@@ -40,6 +40,11 @@
     scrollbar-width: thin;
 }
 
+.imgTitle {
+    color: white;
+    border-bottom: 1px solid #55cbd3;
+}
+
 .photo {
     padding: 5px;
     max-width: 60%;
@@ -57,18 +62,17 @@
     text-align: center;
     font-family: 'Roboto Mono', monospace;
 
-    background-color: #393939;
+    background-color: rgb(46, 46, 46);
     color: rgb(48, 47, 47);
-    border-radius: 10px;
     overflow: auto;
-    box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    /* box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
     -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
     -o-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
-    -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15); */
 
     /* Scroll bar on Firefox */
-    scrollbar-color: #00ad5f #393939;
+    scrollbar-color: #55cbd3 #393939;
     scroll-behavior: smooth;
     scrollbar-arrow-color: transparent;
     scrollbar-width: thin;
@@ -77,23 +81,26 @@
 .tableContainer th {
     padding: 4px;
     padding-top: 10px;
-    background-color: #393939;
-    color: #00ad5f;
+    background-color:  rgb(46, 46, 46);
+    color: #55cbd3;
     font-size: 14px;
     line-height: 1.4;
     text-transform: uppercase;
+    border-bottom: 1px solid #55cbd3;
+    font-weight: 600;
 }
 
 .tableContainer td {
-    padding-top: 35px;
+    padding: 20px;
     font-size: 15px;
-    color: #808080;
+    color: #999999;
     line-height: 1.4;
     background-color: #222222;
+    border-bottom: 1px solid #55cad33f;
 }
 
 tr:hover td {
-    background-color: transparent;
+    background-color: #55cad310;
     cursor: pointer;
 }
 
@@ -111,17 +118,24 @@ tr:hover td {
 
 /* -----------------------------line-graph------------------------ */
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-    color: orangered;
-    background-color: rgb(58, 58, 58);
-    border-color: none;
+    color: white;
+    /* background-color: rgb(100, 210, 218); */
+    background-color: rgb(46, 46, 46);
+    border-color:  rgb(46, 46, 46);
+    border-bottom: 1px solid #55cbd3;
+}
+
+.nav-tabs .nav-link:not(.active) {
+    color: rgba(255, 255, 255, 0.432);
 }
 
 .nav-tabs {
     border-bottom: none;
+    /* color: white; */
 }
 
 .nav-tabs .nav-link:hover{
-    color: gray
+    background-color: rgba(255, 255, 255, 0.322);
 }
 /* ------------------------------------------------------------------------ */
 #controlled-tab-example {

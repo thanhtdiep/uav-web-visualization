@@ -78,7 +78,7 @@ export default class IndexPage extends React.Component {
         <main className="container-fluid wf">
           <div className="row rw1">
             <div className="col-sm-2 imageContainer">
-              Image Stream
+              <p className="imgTitle">TARGETS</p>
               {images}
               <img className="photo" src="http://res.cloudinary.com/dtmjpfpip/image/upload/v1599914558/ex7todyv7i69cytunphw.jpg" />
               <img className="photo" src="http://res.cloudinary.com/dtmjpfpip/image/upload/v1599914558/e8l3xffokh6ie9foy0pn.jpg" />
@@ -98,16 +98,16 @@ export default class IndexPage extends React.Component {
               >
                 <Tab eventKey="chart1" title="Chart 1">
                   <div className="line">
-                    <LineChart data={this.state.lineTemp} time={this.state.time} title="Temperature Overtime" color="rgb(0,255,159)" unit="unit"/>
-                    <LineChart data={this.state.linePressure} time={this.state.time} title="Pressure Overtime" color="rgb(0,184,255)" unit="unit" />
-                    <LineChart data={this.state.lineHumid} time={this.state.time} title="Humidity Overtime" color="rgb(0,30,255)" unit="unit" />
+                    <LineChart data={this.state.lineTemp} time={this.state.time} title="Temperature Overtime" color="rgb(106, 90, 205)" unit="unit"/>
+                    <LineChart data={this.state.linePressure} time={this.state.time} title="Pressure Overtime" color="rgb(255, 165, 0)" unit="unit" />
+                    <LineChart data={this.state.lineHumid} time={this.state.time} title="Humidity Overtime" color="rgb(255, 0, 0)" unit="unit" />
                   </div>
                 </Tab>
                 <Tab eventKey="chart2" title="Chart 2">
                   <div className="line">
-                    <LineChart data={this.state.lineLight} time={this.state.time} title="Light Overtime" color="rgb(106, 90, 205)" unit="unit"/>
-                    <LineChart data={this.state.lineNoise} time={this.state.time} title="Noise Overtime" color="rgb(255, 165, 0)" unit="unit"/>
-                    <LineChart data={this.state.lineGas} time={this.state.time} title="Gas Overtime" color="rgb(255, 0, 0)" unit="unit" />
+                    <LineChart data={this.state.lineLight} time={this.state.time} title="Light Overtime" color="rgb(0,255,159)" unit="unit"/>
+                    <LineChart data={this.state.lineNoise} time={this.state.time} title="Noise Overtime" color="rgb(0,184,255)" unit="unit"/>
+                    <LineChart data={this.state.lineGas} time={this.state.time} title="Gas Overtime" color="rgb(0,30,100)" unit="unit" />
                   </div>
                 </Tab>
               </Tabs>

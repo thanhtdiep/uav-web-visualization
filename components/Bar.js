@@ -9,12 +9,12 @@ export default class BarChart extends React.Component {
                 {
                     label: 'Current Status of sensors',
                     backgroundColor: [
-                        'rgb(0,255,159)',
-                        'rgb(0,184,255)',
-                        'rgb(0,30,255)',
                         'rgb(106, 90, 205)',
                         'rgb(255, 165, 0)',
-                        'rgb(0, 0, 0)'
+                        'rgb(255, 0, 0)',
+                        'rgb(0,255,159)',
+                        'rgb(0,184,255)',
+                        'rgb(0,30,100)'
                     ],
                     borderColor: [
                         'rgba(0, 0, 0, 0.1)'
@@ -39,8 +39,8 @@ export default class BarChart extends React.Component {
                 fontColor: 'white',
                 fontFamily: 'Roboto Mono',
                 text: 'Current status of sensors',
-                fontSize: 14,
-                fontStyle: 'regular'
+                fontSize: 13,
+                fontStyle: 'normal'
             },
             scales: {
                 yAxes: [{

@@ -16,7 +16,7 @@ export default class LineChart extends React.Component {
                 borderDash: [],
                 borderDashOffset: 0.0,
                 borderJoinStyle: 'miter',
-                pointBorderColor: "rgba(75,192,192,1)",
+                pointBorderColor: this.props.color,
                 pointBackgroundColor: "#fff",
                 pointBorderWidth: 1,
                 pointHoverRadius: 5,
