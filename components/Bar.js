@@ -4,7 +4,7 @@ import { Bar } from 'react-chartjs-2'
 export default class BarChart extends React.Component {
     render() {
         const parseData = data => ({
-            labels: ['Temperature', 'Pressure', 'Humidity', 'Light', 'Noise', 'Gas'],
+            labels: ['Temperature', 'Pressure', 'Humidity', 'Light', 'Noise', 'Reducing','Oxidizing','NH3','PM1','PM2.5','PM10'],
             datasets: [
                 {
                     label: 'Current Status of sensors',
@@ -14,7 +14,12 @@ export default class BarChart extends React.Component {
                         'rgb(255, 0, 0)',
                         'rgb(0,255,159)',
                         'rgb(0,184,255)',
-                        'rgb(0,30,100)'
+                        'rgb(0,30,255)',
+                        'rgb(66, 228, 66)',
+                        'rgb(255, 255, 255)',
+                        'rgb(211, 144, 166)',
+                        'rgb(126, 196, 50)',
+                        'rgb(236, 104, 53)'
                     ],
                     borderColor: [
                         'rgba(0, 0, 0, 0.1)'

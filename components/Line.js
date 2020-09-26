@@ -3,7 +3,6 @@ import { Line } from 'react-chartjs-2';
 
 export default class LineChart extends React.Component {
     render() {
-        console.log(this.props.color);
         const parseData = (data, time) => ({
             labels: time,
             datasets: [{
