@@ -175,7 +175,7 @@ tr:hover td {
 }
 
 .nav-tabs .nav-link:hover{
-    background-color: rgba(66, 228, 66, 0.322);
+    background-color: rgba(201, 224, 201, 0.322);
 }
 /* ------------------------------------------------------------------------ */
 #controlled-tab-example {
@@ -202,3 +202,111 @@ main {
 .empty {
     display: none;
 }
+
+.intro {
+    background: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider {
+    background: rgb(97, 105, 109);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(100%);
+}
+
+.intro-text {
+    color: rgb(227, 242, 255);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2rem;
+}
+
+.hide {
+    background: black;
+    overflow: hidden;
+}
+
+.hide span {
+    transform: translateY(100%);
+    display: inline-block;
+}
+
+
+/*  intro buttons */
+.buttonContainer {
+    display: flex;
+    width: 100%;
+    box-shadow: var(--shadow) 4px 4px;
+}
+
+.buttonContainer button {
+    flex-grow: 1;
+    cursor: pointer;
+    position: relative;
+    padding:
+      calc(var(--space) / 1.125)
+      var(--space)
+      var(--space);
+    border: var(--border-size) solid black;
+    color: var(--color-secondary);
+    background-color: var(--color-primary);
+    font-size: 1.5rem;
+    font-family: var(--font-family);
+    text-transform: lowercase;
+    text-shadow: var(--shadow) 2px 2px;
+    transition: flex-grow var(--duration) var(--ease);
+}
+  
+.buttonContainer button + button {
+    border-left: var(--border-size) solid black;
+    margin-left: calc(var(--border-size) * -1);
+}
+  
+.buttonContainer button:hover,
+.buttonContainer button:focus {
+    flex-grow: 2;
+    color: black;
+
+    outline: none;
+    text-shadow: none;
+    background-color: var(--color-secondary);
+}
+  
+.buttonContainer button:focus {
+    outline: var(--border-size) dashed var(--color-primary);
+    outline-offset: calc(var(--border-size) * -3);
+}
+  
+.buttonContainer:hover button:focus:not(:hover) {
+    flex-grow: 1;
+    color: var(--color-secondary);
+    background-color: var(--color-primary);
+    outline-color: var(--color-tertiary);
+}
+  
+.buttonContainer button:active {
+    transform: translateY(var(--border-size));
+}
+
+:root {
+    --border-size: 0.125rem;
+    --duration: 250ms;
+    --ease: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --font-family: monospace;
+    --color-primary: black;
+    --color-secondary: white;
+    --color-tertiary: dodgerblue;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --space: 1rem;
+}
+/* ------------------------------------------------------------ */

@@ -5,8 +5,9 @@ import Layout from '../components/Layout';
 import BarChart from '../components/Bar';
 import Table from '../components/Table';
 import LineChart from '../components/Line';
-import Tabs from 'react-bootstrap/Tabs'
-import Tab from 'react-bootstrap/Tab'
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
+// import { gsap } from 'gsap';
 
 var pusher = new Pusher('83d7f0044a58bb41c86c', {
   cluster: "ap4",
@@ -33,14 +34,20 @@ export default class IndexPage extends React.Component {
       linePm25: [],
       linePm10: [],
       time: [],
-      key: 'chart1'
+      key: 'chart1',
     }
+    this.handleNewClick = this.handleNewClick.bind(this);
+    this.handlePrevClick = this.handlePrevClick.bind(this);
   }
 
   componentDidMount() {
+    const tl = gsap.timeline({ defaults: { ease: "power1.out" } });
+    tl.to(".text", { y: "0%", duration: 1, stagger: 0.25 });
+    if (this.state.buttonPressed) {
+      console.log("pressed");
+    }
     this.receiveStatsFromPusher();
     this.receiveImgFromPusher();
-    this.retrieveData();
   }
 
   playAudio() {
@@ -48,6 +55,56 @@ export default class IndexPage extends React.Component {
     audioEl.play()
   }
 
+  async retrieveData() {
+    fetch('http://localhost:8080/get/stats')
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
+      })
+      .then((result) => {
+        // Pass stored data into states
+        this.setState({
+          data: result.stats.latest,
+          lineTemp: result.stats.lineTemp,
+          lineHumid: result.stats.lineHumidity,
+          linePressure: result.stats.lineNoise,
+          lineLight: result.stats.lineLight,
+          lineNoise: result.stats.lineNoise,
+          lineNh3: result.stats.lineNh3,
+          lineReduce: result.stats.lineReducing,
+          lineOxi: result.stats.lineOxidizing,
+          linePm1: result.stats.linePm1,
+          linePm25: result.stats.linePm25,
+          linePm10: result.stats.linePm10,
+          time: result.stats.time,
+          images: result.target.image,
+          targets: result.target.data
+        });
+      })
+      .catch((error) => {
+        console.log(
+          "There has been a problem with your fetch operation: ",
+          error.message
+        );
+      });
+  }
+
+  handlePrevClick() {
+    this.retrieveData();
+    // Remove intro
+    const tl = gsap.timeline({ defaults: { ease: "power1.out" } });
+    tl.to(".slider", { y: "-100%", duration: 1.5, delay: 0.5 });
+    tl.to(".intro", { y: "-100%", duration: 1 }, "-=1");
+  }
+
+  handleNewClick() {
+    // Remove intro
+    const tl = gsap.timeline({ defaults: { ease: "power1.out" } });
+    tl.to(".slider", { y: "-100%", duration: 1.5, delay: 0.5 });
+    tl.to(".intro", { y: "-100%", duration: 1 }, "-=1");
+  }
   receiveStatsFromPusher() {
     channel.bind('bar-stats', data => {
       console.log(data);
@@ -97,41 +154,6 @@ export default class IndexPage extends React.Component {
     });
   }
 
-  async retrieveData() {
-    fetch('http://localhost:8080/get/stats')
-      .then(function (response) {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Network response was not ok.");
-      })
-      .then((result) => {
-        // Pass stored data into states
-        this.setState({
-          data: result.stats.latest,
-          lineTemp: result.stats.lineTemp,
-          lineHumid: result.stats.lineHumidity,
-          linePressure: result.stats.lineNoise,
-          lineLight: result.stats.lineLight,
-          lineNoise: result.stats.lineNoise,
-          lineNh3: result.stats.lineNh3,
-          lineReduce: result.stats.lineReducing,
-          lineOxi: result.stats.lineOxidizing,
-          linePm1: result.stats.linePm1,
-          linePm25: result.stats.linePm25,
-          linePm10: result.stats.linePm10,
-          time: result.stats.time,
-          images: result.target.image,
-          targets: result.target.data
-        });
-      })
-      .catch(function (error) {
-        console.log(
-          "There has been a problem with your fetch operation: ",
-          error.message
-        );
-      });
-  }
 
   render() {
     const image = (url, index) => (
@@ -140,69 +162,87 @@ export default class IndexPage extends React.Component {
     const images = this.state.images.map((e, i) => image(e.secure_url, i));
     return (
       <Layout pageTitle="Realtime Data Visualization">
-        <main className="container-fluid wf">
-          <div className="row rw1">
-            <div className="col-sm-2 imageContainer">
-              <p className="imgTitle">TARGETS</p>
-              {images}
-            </div>
-            <div className="col-8 col-sm-6 videoContainer">
-              <iframe width="720" height="570" src="https://www.youtube.com/embed/K-bqg8JYlPo" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-            </div>
-            <div className="col-4 lineContainer">
-              <Tabs
-                id="controlled-tab-example"
-                activeKey={this.state.key}
-                onSelect={(k) => this.setState({ key: k })}
-              >
-                <Tab eventKey="chart1" title="Temperature, Pressure, Humidity">
-                  <div className="line">
-                    <LineChart data={this.state.lineTemp} time={this.state.time} title="Temperature Overtime" color="rgb(106, 90, 205)" unit="Celcius" />
-                    <LineChart data={this.state.linePressure} time={this.state.time} title="Pressure Overtime" color="rgb(255, 165, 0)" unit="hPa" />
-                    <LineChart data={this.state.lineHumid} time={this.state.time} title="Humidity Overtime" color="rgb(255, 0, 0)" unit="%" />
-                  </div>
-                </Tab>
-                <Tab eventKey="chart2" title="Light, Noise">
-                  <div className="line">
-                    <LineChart data={this.state.lineLight} time={this.state.time} title="Light Overtime" color="rgb(0,255,159)" unit="Lux" />
-                    <LineChart data={this.state.lineNoise} time={this.state.time} title="Noise Overtime" color="rgb(0,184,255)" unit="dB" />
-                  </div>
-                </Tab>
-                <Tab eventKey="chart3" title="Reducing, Oxidizing, NH3">
-                  <div className="line">
-                    <LineChart data={this.state.lineReduce} time={this.state.time} title="Reducing Overtime" color="rgb(0,30,255)" unit="ppm" />
-                    <LineChart data={this.state.lineOxi} time={this.state.time} title="Oxidizing Overtime" color="rgb(66, 228, 66)" unit="ppm" />
-                    <LineChart data={this.state.lineNh3} time={this.state.time} title="NH3 Overtime" color="rgb(255, 255, 255)" unit="ppm" />
-                  </div>
-                </Tab>
-                <Tab eventKey="chart4" title="PM1, PM2.5, PM10">
-                  <div className="line">
-                    <LineChart data={this.state.linePm1} time={this.state.time} title="PM1 Overtime" color="rgb(211, 144, 166)" unit="µg/m3" />
-                    <LineChart data={this.state.linePm25} time={this.state.time} title="PM2.5 Overtime" color="rgb(126, 196, 255)" unit="µg/m3" />
-                    <LineChart data={this.state.linePm10} time={this.state.time} title="PM10 Overtime" color="rgb(236, 104, 53)" unit="µg/m3" />
-                  </div>
-                </Tab>
-              </Tabs>
-            </div>
-          </div>
-
-          <div className="row rw2">
-            <div className="col tableContainer">
-              <Table data={this.state.targets} />
-            </div>
-            <div className="col wf2">
-              <div className="col bar">
-                <BarChart data={this.state.data} />
+        <body>
+          <main className="container-fluid wf">
+            <div className="row rw1">
+              <div className="col-sm-2 imageContainer">
+                <p className="imgTitle">TARGETS</p>
+                {images}
+              </div>
+              <div className="col-8 col-sm-6 videoContainer">
+                <iframe width="720" height="570" src="https://www.youtube.com/embed/K-bqg8JYlPo" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+              </div>
+              <div className="col-4 lineContainer">
+                <Tabs
+                  id="controlled-tab-example"
+                  activeKey={this.state.key}
+                  onSelect={(k) => this.setState({ key: k })}
+                >
+                  <Tab eventKey="chart1" title="Temperature, Pressure, Humidity">
+                    <div className="line">
+                      <LineChart data={this.state.lineTemp} time={this.state.time} title="Temperature Overtime" color="rgb(106, 90, 205)" unit="Celcius" />
+                      <LineChart data={this.state.linePressure} time={this.state.time} title="Pressure Overtime" color="rgb(255, 165, 0)" unit="hPa" />
+                      <LineChart data={this.state.lineHumid} time={this.state.time} title="Humidity Overtime" color="rgb(255, 0, 0)" unit="%" />
+                    </div>
+                  </Tab>
+                  <Tab eventKey="chart2" title="Light, Noise">
+                    <div className="line">
+                      <LineChart data={this.state.lineLight} time={this.state.time} title="Light Overtime" color="rgb(0,255,159)" unit="Lux" />
+                      <LineChart data={this.state.lineNoise} time={this.state.time} title="Noise Overtime" color="rgb(0,184,255)" unit="dB" />
+                    </div>
+                  </Tab>
+                  <Tab eventKey="chart3" title="Reducing, Oxidizing, NH3">
+                    <div className="line">
+                      <LineChart data={this.state.lineReduce} time={this.state.time} title="Reducing Overtime" color="rgb(0,30,255)" unit="ppm" />
+                      <LineChart data={this.state.lineOxi} time={this.state.time} title="Oxidizing Overtime" color="rgb(66, 228, 66)" unit="ppm" />
+                      <LineChart data={this.state.lineNh3} time={this.state.time} title="NH3 Overtime" color="rgb(255, 255, 255)" unit="ppm" />
+                    </div>
+                  </Tab>
+                  <Tab eventKey="chart4" title="PM1, PM2.5, PM10">
+                    <div className="line">
+                      <LineChart data={this.state.linePm1} time={this.state.time} title="PM1 Overtime" color="rgb(211, 144, 166)" unit="µg/m3" />
+                      <LineChart data={this.state.linePm25} time={this.state.time} title="PM2.5 Overtime" color="rgb(126, 196, 255)" unit="µg/m3" />
+                      <LineChart data={this.state.linePm10} time={this.state.time} title="PM10 Overtime" color="rgb(236, 104, 53)" unit="µg/m3" />
+                    </div>
+                  </Tab>
+                </Tabs>
               </div>
             </div>
-            <div className="col extra"></div>
-            <div>
-              <audio className="audio-element">
-                <source src="https://res.cloudinary.com/dtmjpfpip/video/upload/v1600939155/siren_t4zvvu.mp3"></source>
-              </audio>
+
+            <div className="row rw2">
+              <div className="col tableContainer">
+                <Table data={this.state.targets} />
+              </div>
+              <div className="col wf2">
+                <div className="col bar">
+                  <BarChart data={this.state.data} />
+                </div>
+              </div>
+              <div className="col extra"></div>
+              <div>
+                <audio className="audio-element">
+                  <source src="https://res.cloudinary.com/dtmjpfpip/video/upload/v1600939155/siren_t4zvvu.mp3"></source>
+                </audio>
+              </div>
+            </div>
+          </main>
+          <div className="intro">
+            <div className="intro-text">
+              <h1 className="hide">
+                <span className="text-title">UAV Web Interface</span>
+              </h1>
+              <h1 className="hide">
+                <span className="text">how do you wish to start?</span>
+              </h1>
+              <div className="buttonContainer">
+                <button type="button" className="buttonNew" onClick={this.handleNewClick} >new session</button>
+                <button type="button" className="buttonPrev" onClick={this.handlePrevClick} >previous session</button>
+              </div>
             </div>
           </div>
-        </main>
+          <div className="slider"></div>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+        </body>
       </Layout >
     );
   }
