@@ -73,10 +73,7 @@ app.prepare()
                     statResult[statResult.length - 1].noise,
                     statResult[statResult.length - 1].reducing,
                     statResult[statResult.length - 1].oxidizing,
-                    statResult[statResult.length - 1].nh3,
-                    statResult[statResult.length - 1].pm1,
-                    statResult[statResult.length - 1].pm25,
-                    statResult[statResult.length - 1].pm10,
+                    statResult[statResult.length - 1].nh3
                 ];
 
                 // Search for detected targets  
@@ -94,10 +91,7 @@ app.prepare()
                             lineNoise: statResult.map(data => data.noise),
                             lineReducing: statResult.map(data => data.reducing),
                             lineOxidizing: statResult.map(data => data.oxidizing),
-                            lineNh3: statResult.map(data => data.nh3),
-                            linePm1: statResult.map(data => data.pm1),
-                            linePm25: statResult.map(data => data.pm25),
-                            linePm10: statResult.map(data => data.pm10)
+                            lineNh3: statResult.map(data => data.nh3)
                         },
                         target: {
                             data: imgResult.map(data => data.target),
@@ -127,9 +121,6 @@ app.prepare()
                     reducing: req.body.reduce,
                     oxidizing: req.body.oxi,
                     nh3: req.body.nh3,
-                    pm1: req.body.pm1,
-                    pm25: req.body.pm25,
-                    pm10: req.body.pm10,
                     time: (new Date).toTimeString().substring(3, 8)
                 });
 
@@ -141,10 +132,7 @@ app.prepare()
                     req.body.noise,
                     req.body.reduce,
                     req.body.oxi,
-                    req.body.nh3,
-                    req.body.pm1,
-                    req.body.pm25,
-                    req.body.pm10
+                    req.body.nh3
                 ]
 
                 console.log(stats);

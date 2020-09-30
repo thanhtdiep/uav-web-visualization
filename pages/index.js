@@ -7,6 +7,7 @@ import Table from '../components/Table';
 import LineChart from '../components/Line';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+import Chaffle from 'chaffle';
 // import { gsap } from 'gsap';
 
 var pusher = new Pusher('83d7f0044a58bb41c86c', {
@@ -30,9 +31,6 @@ export default class IndexPage extends React.Component {
       lineReduce: [],
       lineOxi: [],
       lineNh3: [],
-      linePm1: [],
-      linePm25: [],
-      linePm10: [],
       time: [],
       key: 'chart1',
     }
@@ -41,11 +39,20 @@ export default class IndexPage extends React.Component {
   }
 
   componentDidMount() {
+    // Intro animation
     const tl = gsap.timeline({ defaults: { ease: "power1.out" } });
     tl.to(".text", { y: "0%", duration: 1, stagger: 0.25 });
-    if (this.state.buttonPressed) {
-      console.log("pressed");
-    }
+
+    const elements = document.querySelectorAll('[data-chaffle]');
+    Array.prototype.forEach.call(elements, function (el) {
+      const chaffle = new Chaffle(el, {
+        lang: 'en', // default: 'en'
+        speed: 20, // default: 20
+        delay: 100, // default: 100
+      });
+      chaffle.init();
+    });
+
     this.receiveStatsFromPusher();
     this.receiveImgFromPusher();
   }
@@ -75,9 +82,6 @@ export default class IndexPage extends React.Component {
           lineNh3: result.stats.lineNh3,
           lineReduce: result.stats.lineReducing,
           lineOxi: result.stats.lineOxidizing,
-          linePm1: result.stats.linePm1,
-          linePm25: result.stats.linePm25,
-          linePm10: result.stats.linePm10,
           time: result.stats.time,
           images: result.target.image,
           targets: result.target.data
@@ -120,9 +124,6 @@ export default class IndexPage extends React.Component {
         this.state.lineReduce.push(data[5]);
         this.state.lineOxi.push(data[6]);
         this.state.lineNh3.push(data[7]);
-        this.state.linePm1.push(data[8]);
-        this.state.linePm25.push(data[9]);
-        this.state.linePm10.push(data[10]);
         this.state.time.push((new Date).toTimeString().substring(3, 8));
       })
     })
@@ -198,20 +199,13 @@ export default class IndexPage extends React.Component {
                       <LineChart data={this.state.lineNh3} time={this.state.time} title="NH3 Overtime" color="rgb(255, 255, 255)" unit="ppm" />
                     </div>
                   </Tab>
-                  <Tab eventKey="chart4" title="PM1, PM2.5, PM10">
-                    <div className="line">
-                      <LineChart data={this.state.linePm1} time={this.state.time} title="PM1 Overtime" color="rgb(211, 144, 166)" unit="µg/m3" />
-                      <LineChart data={this.state.linePm25} time={this.state.time} title="PM2.5 Overtime" color="rgb(126, 196, 255)" unit="µg/m3" />
-                      <LineChart data={this.state.linePm10} time={this.state.time} title="PM10 Overtime" color="rgb(236, 104, 53)" unit="µg/m3" />
-                    </div>
-                  </Tab>
                 </Tabs>
               </div>
             </div>
 
             <div className="row rw2">
               <div className="col tableContainer">
-                <Table data={this.state.targets} />
+                  <Table data={this.state.targets} />
               </div>
               <div className="col wf2">
                 <div className="col bar">
@@ -229,9 +223,6 @@ export default class IndexPage extends React.Component {
           <div className="intro">
             <div className="intro-text">
               <h1 className="hide">
-                <span className="text-title">UAV Web Interface</span>
-              </h1>
-              <h1 className="hide">
                 <span className="text">how do you wish to start?</span>
               </h1>
               <div className="buttonContainer">
@@ -239,9 +230,13 @@ export default class IndexPage extends React.Component {
                 <button type="button" className="buttonPrev" onClick={this.handlePrevClick} >previous session</button>
               </div>
             </div>
+            <div >
+              <span data-chaffle="en" className="group-text">EGH455 - GROUP 6</span>
+            </div>
           </div>
           <div className="slider"></div>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+          <script src="https://npmcdn.com/chaffle/chaffle.min.js"></script>
         </body>
       </Layout >
     );

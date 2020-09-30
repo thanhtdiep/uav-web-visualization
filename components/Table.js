@@ -16,9 +16,6 @@ export default class Table extends React.Component {
                         <th>REDUCING (ppm)</th>
                         <th>OXIDIZING (ppm)</th>
                         <th>NH3 (ppm)</th>
-                        <th>PM1 (µg/m3)</th>
-                        <th>PM2.5 (µg/m3)</th>
-                        <th>PM10 (µg/m3)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,9 +30,6 @@ export default class Table extends React.Component {
                             <td key={uuid.v4()}>{element[6]}</td>
                             <td key={uuid.v4()}>{element[7]}</td>
                             <td key={uuid.v4()}>{element[8]}</td>
-                            <td key={uuid.v4()}>{element[9]}</td>
-                            <td key={uuid.v4()}>{element[10]}</td>
-                            <td key={uuid.v4()}>{element[11]}</td>
                         </tr>
                     )) : <tr></tr>}
                 </tbody>
