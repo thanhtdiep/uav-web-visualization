@@ -13,9 +13,9 @@ export default class Table extends React.Component {
                         <th>HUMIDITY (%)</th>
                         <th>LIGHT (Lux)</th>
                         <th>NOISE (dB)</th>
-                        <th>REDUCING (ppm)</th>
-                        <th>OXIDIZING (ppm)</th>
-                        <th>NH3 (ppm)</th>
+                        <th>REDUCING (kO)</th>
+                        <th>OXIDIZING (kO)</th>
+                        <th>NH3 (kO)</th>
                     </tr>
                 </thead>
                 <tbody>

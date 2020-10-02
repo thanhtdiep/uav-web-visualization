@@ -33,6 +33,7 @@ export default class IndexPage extends React.Component {
       lineNh3: [],
       time: [],
       key: 'chart1',
+      barKey: 'bar1'
     }
     this.handleNewClick = this.handleNewClick.bind(this);
     this.handlePrevClick = this.handlePrevClick.bind(this);
@@ -181,22 +182,22 @@ export default class IndexPage extends React.Component {
                 >
                   <Tab eventKey="chart1" title="Temperature, Pressure, Humidity">
                     <div className="line">
-                      <LineChart data={this.state.lineTemp} time={this.state.time} title="Temperature Overtime" color="rgb(106, 90, 205)" unit="Celcius" />
-                      <LineChart data={this.state.linePressure} time={this.state.time} title="Pressure Overtime" color="rgb(255, 165, 0)" unit="hPa" />
-                      <LineChart data={this.state.lineHumid} time={this.state.time} title="Humidity Overtime" color="rgb(255, 0, 0)" unit="%" />
+                      <LineChart data={this.state.lineTemp} time={this.state.time} title="Temperature vs Time" color="rgb(106, 90, 205)" unit="Celcius" />
+                      <LineChart data={this.state.linePressure} time={this.state.time} title="Pressure vs Time" color="rgb(255, 165, 0)" unit="hPa" />
+                      <LineChart data={this.state.lineHumid} time={this.state.time} title="Humidity vs Time" color="rgb(255, 0, 0)" unit="%" />
                     </div>
                   </Tab>
                   <Tab eventKey="chart2" title="Light, Noise">
                     <div className="line">
-                      <LineChart data={this.state.lineLight} time={this.state.time} title="Light Overtime" color="rgb(0,255,159)" unit="Lux" />
-                      <LineChart data={this.state.lineNoise} time={this.state.time} title="Noise Overtime" color="rgb(0,184,255)" unit="dB" />
+                      <LineChart data={this.state.lineLight} time={this.state.time} title="Light vs Time" color="rgb(0,255,159)" unit="Lux" />
+                      <LineChart data={this.state.lineNoise} time={this.state.time} title="Noise vs Time" color="rgb(0,184,255)" unit="dB" />
                     </div>
                   </Tab>
                   <Tab eventKey="chart3" title="Reducing, Oxidizing, NH3">
                     <div className="line">
-                      <LineChart data={this.state.lineReduce} time={this.state.time} title="Reducing Overtime" color="rgb(0,30,255)" unit="ppm" />
-                      <LineChart data={this.state.lineOxi} time={this.state.time} title="Oxidizing Overtime" color="rgb(66, 228, 66)" unit="ppm" />
-                      <LineChart data={this.state.lineNh3} time={this.state.time} title="NH3 Overtime" color="rgb(255, 255, 255)" unit="ppm" />
+                      <LineChart data={this.state.lineReduce} time={this.state.time} title="Reducing vs Time" color="rgb(0,30,255)" unit="kO" />
+                      <LineChart data={this.state.lineOxi} time={this.state.time} title="Oxidizing vs Time" color="rgb(66, 228, 66)" unit="kO" />
+                      <LineChart data={this.state.lineNh3} time={this.state.time} title="NH3 vs Time" color="rgb(255, 255, 255)" unit="kO" />
                     </div>
                   </Tab>
                 </Tabs>
@@ -205,11 +206,24 @@ export default class IndexPage extends React.Component {
 
             <div className="row rw2">
               <div className="col tableContainer">
-                  <Table data={this.state.targets} />
+                <Table data={this.state.targets} />
               </div>
-              <div className="col wf2">
+              <div className="col barContainer">
                 <div className="col bar">
-                  <BarChart data={this.state.data} />
+                  <BarChart
+                    labels={['Temperature', 'Pressure', 'Light', 'Noise', 'Oxidizing', 'NH3']}
+                    data={[this.state.data[0], this.state.data[1], this.state.data[3], this.state.data[4], this.state.data[6], this.state.data[7]]}
+                    color={['rgb(106, 90, 205)', 'rgb(255, 165, 0)', 'rgb(0,255,159)', 'rgb(0,184,255)', 'rgb(66, 228, 66)', 'rgb(255, 255, 255)']}
+                    title="Current Temperature, Pressure, Light, Noise, Oxidizing and NH3"
+                  />
+                </div>
+                <div className="col bar">
+                  <BarChart
+                    labels={['Humidity', 'Reducing']}
+                    data={[this.state.data[2], this.state.data[5]]}
+                    color={['rgb(255, 0, 0)', 'rgb(0,30,255)']}
+                    title="Current Humidity and Reducing"
+                  />
                 </div>
               </div>
               <div className="col extra"></div>

@@ -4,20 +4,11 @@ import { Bar } from 'react-chartjs-2'
 export default class BarChart extends React.Component {
     render() {
         const parseData = data => ({
-            labels: ['Temperature', 'Pressure', 'Humidity', 'Light', 'Noise', 'Reducing','Oxidizing','NH3'],
+            labels: this.props.labels,
             datasets: [
                 {
                     label: 'Current Status of sensors',
-                    backgroundColor: [
-                        'rgb(106, 90, 205)',
-                        'rgb(255, 165, 0)',
-                        'rgb(255, 0, 0)',
-                        'rgb(0,255,159)',
-                        'rgb(0,184,255)',
-                        'rgb(0,30,255)',
-                        'rgb(66, 228, 66)',
-                        'rgb(255, 255, 255)'
-                    ],
+                    backgroundColor: this.props.color,
                     borderColor: [
                         'rgba(0, 0, 0, 0.1)'
                     ],
@@ -30,6 +21,7 @@ export default class BarChart extends React.Component {
         })
 
         const options = {
+            maintainAspectRatio: false,
             legend: {
                 display: false,
                 labels: {
@@ -47,6 +39,7 @@ export default class BarChart extends React.Component {
             scales: {
                 yAxes: [{
                     ticks: {
+                        stepSize: 50,
                         beginAtZero: true,
                         fontFamily: 'Roboto Mono',
                         fontColor: 'rgb(165, 165, 165)'
@@ -55,7 +48,7 @@ export default class BarChart extends React.Component {
                 xAxes: [{
                     ticks: {
                         fontFamily: 'Roboto Mono',
-                        fontColor:  'rgb(165, 165, 165)'
+                        fontColor: 'rgb(165, 165, 165)'
                     }
                 }]
             }

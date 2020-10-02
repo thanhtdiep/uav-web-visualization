@@ -124,8 +124,8 @@ tr:hover td {
 }
 
 /*----------------------------------------------------------------*/
-.bar {
-    /* border: 1px solid black; */
+.barContainer {
+    /* border: 1px solid white; */
     height: 35vh;
 
     box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
@@ -133,6 +133,10 @@ tr:hover td {
     -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
     -o-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
     -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+}
+
+.bar {
+    padding: 10px;
 }
 
 .lineContainer {
@@ -206,7 +210,7 @@ main {
 .intro {
     /* background: black; */
     background: rgb(2,0,36);
-    background: linear-gradient(180deg, rgb(0, 0, 0) 60%, rgba(66,131,152,1) 100%);
+    background: linear-gradient(180deg,   rgb(40, 88, 92) 0%,  rgb(0, 0, 0) 50%,  rgb(29, 63, 66) 100%);
     position: fixed;
     top: 0;
     left: 0;
