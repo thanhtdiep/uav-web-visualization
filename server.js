@@ -110,7 +110,9 @@ app.prepare()
 
         // Handle UPDATE route
         server.post('/update/stats', async (req, res) => {
-            // console.log(req.body);
+            // console.log('Request Body: ' + req);
+            console.log('Data received');
+
             try {
                 const newStat = new Stat({
                     temperature: req.body.temp,

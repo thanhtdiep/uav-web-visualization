@@ -204,7 +204,9 @@ main {
 }
 
 .intro {
-    background: black;
+    /* background: black; */
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgb(0, 0, 0) 60%, rgba(66,131,152,1) 100%);
     position: fixed;
     top: 0;
     left: 0;
@@ -216,7 +218,7 @@ main {
 }
 
 .slider {
-    background: rgb(97, 105, 109);
+    background: rgb(34, 34, 34);
     position: fixed;
     top: 0;
     left: 0;
@@ -227,12 +229,12 @@ main {
 
 .intro-text {
     color: rgb(227, 242, 255);
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Cutive Mono', monospace;
     font-size: 3rem;
 }
 
 .hide {
-    background: black;
+    background: rgb(0, 0, 0);
     overflow: hidden;
 }
 
