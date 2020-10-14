@@ -8,7 +8,6 @@ import LineChart from '../components/Line';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Chaffle from 'chaffle';
-import Iframe from 'react-iframe';
 // import { gsap } from 'gsap';
 
 var pusher = new Pusher('83d7f0044a58bb41c86c', {
@@ -59,9 +58,9 @@ export default class IndexPage extends React.Component {
     this.receiveImgFromPusher();
   }
 
-  playAudio() {
-    const audioEl = document.getElementsByClassName("audio-element")[0]
-    audioEl.play()
+  playAudio(audio) {
+    const audio1 = document.getElementsByClassName(audio)[0]
+    audio1.play()
   }
 
   async retrieveData() {
@@ -153,7 +152,13 @@ export default class IndexPage extends React.Component {
         })
 
       // Play alert when target detected
-      this.playAudio()
+      if (Object.values(data)[0].id == "A") {
+        this.playAudio("audio-element1");
+      } else if (Object.values(data)[0].id == "B") {
+        this.playAudio("audio-element2");
+      } else if (Object.values(data)[0].id == "C") {
+        this.playAudio("audio-element3");
+      } 
     });
   }
 
@@ -174,7 +179,6 @@ export default class IndexPage extends React.Component {
               </div>
               <div className="col-8 col-sm-6 videoContainer">
                 <iframe width="720" height="570" src="http://192.168.43.41:8000/" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                {/* <Iframe url="192.168.43.41:8000" width="720" height="570" /> */}
                 <img src="192.168.43.41:8000" />
               </div>
               <div className="col-4 lineContainer">
@@ -231,7 +235,13 @@ export default class IndexPage extends React.Component {
               </div>
               <div className="col extra"></div>
               <div>
-                <audio className="audio-element">
+                <audio className="audio-element1">
+                  <source src="https://res.cloudinary.com/dtmjpfpip/video/upload/v1600939155/siren_t4zvvu.mp3"></source>
+                </audio>
+                <audio className="audio-element2">
+                  <source src="https://res.cloudinary.com/dtmjpfpip/video/upload/v1600939155/siren_t4zvvu.mp3"></source>
+                </audio>
+                <audio className="audio-element3">
                   <source src="https://res.cloudinary.com/dtmjpfpip/video/upload/v1600939155/siren_t4zvvu.mp3"></source>
                 </audio>
               </div>

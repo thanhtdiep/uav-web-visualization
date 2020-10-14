@@ -33,7 +33,7 @@ export default class BarChart extends React.Component {
                 fontColor: 'white',
                 fontFamily: 'Roboto Mono',
                 text: this.props.title,
-                fontSize: 11,
+                fontSize: 13,
                 fontStyle: 'normal'
             },
             scales: {
