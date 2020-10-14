@@ -126,8 +126,10 @@ tr:hover td {
 /*----------------------------------------------------------------*/
 .barContainer {
     /* border: 1px solid white; */
+    padding: 0;
     height: 35vh;
-
+    overflow-y: auto;
+    /* Shadow  */
     box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
     -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
@@ -136,7 +138,7 @@ tr:hover td {
 }
 
 .bar {
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .lineContainer {

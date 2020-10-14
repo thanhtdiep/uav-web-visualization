@@ -33,6 +33,7 @@
     "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
     "react-gsap": "^2.2.1",
+    "react-iframe": "^1.8.0",
     "uniqid": "^5.2.0"
   },
   "devDependencies": {

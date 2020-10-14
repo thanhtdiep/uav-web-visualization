@@ -8,6 +8,7 @@ import LineChart from '../components/Line';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Chaffle from 'chaffle';
+import Iframe from 'react-iframe';
 // import { gsap } from 'gsap';
 
 var pusher = new Pusher('83d7f0044a58bb41c86c', {
@@ -152,7 +153,7 @@ export default class IndexPage extends React.Component {
         })
 
       // Play alert when target detected
-      // this.playAudio()
+      this.playAudio()
     });
   }
 
@@ -172,7 +173,9 @@ export default class IndexPage extends React.Component {
                 {images}
               </div>
               <div className="col-8 col-sm-6 videoContainer">
-                <iframe width="720" height="570" src="https://www.youtube.com/embed/K-bqg8JYlPo" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                <iframe width="720" height="570" src="http://192.168.43.41:8000/" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                {/* <Iframe url="192.168.43.41:8000" width="720" height="570" /> */}
+                <img src="192.168.43.41:8000" />
               </div>
               <div className="col-4 lineContainer">
                 <Tabs
@@ -211,18 +214,18 @@ export default class IndexPage extends React.Component {
               <div className="col barContainer">
                 <div className="col bar">
                   <BarChart
-                    labels={['Temperature', 'Pressure', 'Light', 'Noise', 'Oxidizing', 'NH3']}
-                    data={[this.state.data[0], this.state.data[1], this.state.data[3], this.state.data[4], this.state.data[6], this.state.data[7]]}
-                    color={['rgb(106, 90, 205)', 'rgb(255, 165, 0)', 'rgb(0,255,159)', 'rgb(0,184,255)', 'rgb(66, 228, 66)', 'rgb(255, 255, 255)']}
-                    title="Current Temperature, Pressure, Light, Noise, Oxidizing and NH3"
+                    labels={['Temperature', 'Humidity', 'Light', 'Noise', 'Oxidizing', 'NH3']}
+                    data={[this.state.data[0], this.state.data[2], this.state.data[3], this.state.data[4], this.state.data[6], this.state.data[7]]}
+                    color={['rgb(106, 90, 205)', 'rgb(255, 0, 0)', 'rgb(0,255,159)', 'rgb(0,184,255)', 'rgb(66, 228, 66)', 'rgb(255, 255, 255)']}
+                    title="Current status of sensors"
                   />
                 </div>
                 <div className="col bar">
                   <BarChart
-                    labels={['Humidity', 'Reducing']}
-                    data={[this.state.data[2], this.state.data[5]]}
-                    color={['rgb(255, 0, 0)', 'rgb(0,30,255)']}
-                    title="Current Humidity and Reducing"
+                    labels={['Pressure', 'Reducing']}
+                    data={[this.state.data[1], this.state.data[5]]}
+                    color={['rgb(255, 165, 0)', 'rgb(0,30,255)']}
+                    title=""
                   />
                 </div>
               </div>
