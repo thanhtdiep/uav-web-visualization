@@ -239,10 +239,10 @@ export default class IndexPage extends React.Component {
                   <source src="https://res.cloudinary.com/dtmjpfpip/video/upload/v1600939155/siren_t4zvvu.mp3"></source>
                 </audio>
                 <audio className="audio-element2">
-                  <source src="https://res.cloudinary.com/dtmjpfpip/video/upload/v1600939155/siren_t4zvvu.mp3"></source>
+                  <source src="https://res.cloudinary.com/dtmjpfpip/video/upload/v1602719943/siren_fiction_x7nhug.mp3"></source>
                 </audio>
                 <audio className="audio-element3">
-                  <source src="https://res.cloudinary.com/dtmjpfpip/video/upload/v1600939155/siren_t4zvvu.mp3"></source>
+                  <source src="https://res.cloudinary.com/dtmjpfpip/video/upload/v1602719951/siren_fire_ytlhyg.mp3"></source>
                 </audio>
               </div>
             </div>
